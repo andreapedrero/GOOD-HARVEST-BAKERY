@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Orders - Good Harvest Bakery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Contact & Custom Orders</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Our Desserts</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="contact.html">Custom Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Get in Touch</h2>
+            <p>Have questions about allergen processing or want to place a custom order for a health-conscious event? Fill out our order form below, and our baking team will reach out to you within 24 hours.</p>
+            
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Order & Inquiry Details</legend>
+                    
+                    <p>
+                        <label for="full-name">Full Name:</label>
+                        <input type="text" id="full-name" name="fullName" required placeholder="Jane Doe">
+                    </p>
+                    
+                    <p>
+                        <label for="email-address">Email Address:</label>
+                        <input type="email" id="email-address" name="emailAddress" required placeholder="jane@example.com">
+                    </p>
+                    
+                    <p>
+                        <label for="dietary-restriction">Primary Dietary Need:</label>
+                        <select id="dietary-restriction" name="dietaryRestriction">
+                            <option value="none">No specific restriction</option>
+                            <option value="gluten-free">Gluten-Free Only</option>
+                            <option value="vegan">Vegan / Plant-Based</option>
+                            <option value="low-sugar">Low Sugar / Keto</option>
+                        </select>
+                    </p>
+                    
+                    <p>
+                        <label for="message-content">Your Message or Custom Order Details:</label>
+                        <textarea id="message-content" name="messageContent" rows="5" required placeholder="Describe what treats you are looking for..."></textarea>
+                    </p>
+                    
+                    <p>
+                        <button type="submit">Submit Inquiry</button>
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Good Harvest Bakery. Built with love and healthy ingredients.</p>
+    </footer>
+</body>
+</html>
