@@ -36,6 +36,7 @@
                         <label for="email-address">Email Address:</label>
                         <input type="email" id="email-address" name="emailAddress" required placeholder="jane@example.com">
                     </p>
+                    <span id="email-error" style="display: block; font-size: 13px; font-weight: bold; margin-top: -10px; margin-bottom: 15px;"></span>
                     
                     <p>
                         <label for="dietary-restriction">Primary Dietary Need:</label>
@@ -63,4 +64,63 @@
         <p>&copy; 2026 Good Harvest Bakery. Built with love and healthy ingredients.</p>
     </footer>
 </body>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const orderForm = document.querySelector('form');
+    if (!orderForm) return;
+
+    orderForm.addEventListener('submit', function(event) {
+        let isFormValid = true;
+        
+        // Ajustado para tu ID exacta "full-name"
+        const nameField = document.getElementById('full-name');
+        const nameError = document.getElementById('name-error');
+        const emailField = document.getElementById('email');
+        const emailError = document.getElementById('email-error');
+
+        if (nameField) {
+            if (nameField.value.trim() === "") {
+                displayFieldError(nameField, nameError, "Please enter your name. This field cannot be left blank.");
+                isFormValid = false;
+            } else {
+                clearFieldError(nameField, nameError);
+            }
+        }
+
+        if (emailField) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailField.value.trim())) {
+                displayFieldError(emailField, emailError, "Please provide a valid email address (e.g., name@example.com).");
+                isFormValid = false;
+            } else {
+                clearFieldError(emailField, emailError);
+            }
+        }
+
+        if (!isFormValid) {
+            event.preventDefault(); 
+        } else {
+            alert("Thank you! Your custom order request has been validated and submitted successfully.");
+        }
+    });
+});
+
+function displayFieldError(inputElement, errorElement, message) {
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.color = "#cc0000";
+    }
+    inputElement.style.borderColor = "#cc0000";
+    inputElement.style.backgroundColor = "#fff0f0";
+}
+
+// Limpiar errores para corregir sin reiniciar el formulario
+function clearFieldError(inputElement, errorElement) {
+    if (errorElement) {
+        errorElement.textContent = "";
+    }
+    inputElement.style.borderColor = "#ccc";
+    inputElement.style.backgroundColor = "#fff";
+}
+</script>
 </html>
