@@ -44,4 +44,74 @@
         <p>&copy; 2026 Good Harvest Bakery. Built with love and healthy ingredients.</p>
     </footer>
 </body>
+    <!-- ======================================================= -->
+<!-- SECCIÓN DEL BUSCADOR INTERACTIVO (TOUCHSTONE 4)       -->
+<!-- ======================================================= -->
+<section id="interactive-search" style="padding: 30px 20px; max-width: 600px; margin: 20px auto; text-align: center; background-color: #fdfaf6; border-radius: 8px; border: 1px solid #e6dfd5; font-family: sans-serif;">
+    <h3 style="color: #5c4033; margin-bottom: 5px;">Find Your Favorite Treats</h3>
+    <p style="color: #7c6a5a; font-size: 14px; margin-bottom: 15px;">Search our menu dynamically (try typing "cookies" or "muffins"):</p>
+    
+    <input type="text" id="dessert-search" placeholder="Type to search desserts..." style="padding: 12px; width: 85%; max-width: 400px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+    
+    <!-- Aquí se mostrarán los resultados dinámicamente -->
+    <div id="search-results" style="margin-top: 15px; font-weight: normal; color: #333; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto;"></div>
+</section>
+
+<script>
+// Datos de los productos (Uso de Objetos y Arrays requeridos por Sophia)
+const dessertsMenu = [
+    { name: "Vegan Chocolate Chip Cookies", type: "cookies", description: "Rich plant-based treats that melt in your mouth." },
+    { name: "Gluten-Free Blueberry Muffins", type: "muffins", description: "Fluffy assorted berry muffins baked fresh daily." },
+    { name: "Custom Organic Celebration Cake", type: "cake", description: "Naturally sweetened cakes tailored for your special events." }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('dessert-search');
+    const resultsDiv = document.getElementById('search-results');
+    
+    if (!searchInput || !resultsDiv) return;
+
+    // PASO 4: Cargar última búsqueda desde localStorage si existe
+    const savedSearch = localStorage.getItem('lastDessertSearch');
+    if (savedSearch) {
+        searchInput.value = savedSearch;
+        filterDesserts(savedSearch, resultsDiv);
+    }
+
+    // PASO 2: Escuchar la acción del usuario en tiempo real (Input/Click)
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value;
+        localStorage.setItem('lastDessertSearch', query); // Guardar en almacenamiento local
+        filterDesserts(query, resultsDiv);
+    });
+});
+
+// Función modularizada para filtrar y actualizar la interfaz dinámicamente
+function filterDesserts(query, container) {
+    container.innerHTML = ""; // Limpiar resultados previos
+    
+    if (query.trim() === "") return;
+
+    // Filtrar la información del Array de objetos
+    const filtered = dessertsMenu.filter(item => 
+        item.name.toLowerCase().includes(query.toLowerCase()) || 
+        item.type.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+        container.innerHTML = "<p style='color: #999; text-align: center;'>No matching treats found. Try another keyword!</p>";
+        return;
+    }
+
+    // Crear y añadir los elementos HTML dinámicamente
+    filtered.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.style.padding = "10px";
+        itemDiv.style.borderBottom = "1px dashed #ddd";
+        itemDiv.innerHTML = `<strong style="color: #aa7c11;">${item.name}</strong><br><span style="font-size: 13px; color: #555;">${item.description}</span>`;
+        container.appendChild(itemDiv);
+    });
+}
+</script>
+<!-- ======================================================= -->
 </html>
